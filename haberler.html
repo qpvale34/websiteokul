@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Haberler - Dudullu AMANETOĞLU ANADOLU İMAM HATİP LİSESİ</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-sky-600 text-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div id="schoolLogo" class="rounded-full bg-white p-2 h-16 w-16 flex items-center justify-center">
+                        <span class="text-sky-600 font-bold text-2xl">DA</span>
+                    </div>
+                    <h1 id="schoolName" class="ml-3 text-xl font-bold">Dudullu AMANETOĞLU<br/>ANADOLU İMAM HATİP LİSESİ</h1>
+                </div>
+                <button id="sidebarToggle" class="text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-sky-800 transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+                    <div class="p-4">
+                        <button id="sidebarClose" class="text-white mb-8">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        <nav class="flex flex-col space-y-4">
+                            <a href="index.html" class="text-white hover:text-sky-200">Ana Sayfa</a>
+                            <a href="okulumuzdan.html" class="text-white hover:text-sky-200">Okulumuzdan</a>
+                            <a href="iletisim.html" class="text-white hover:text-sky-200">İletişim</a>
+                            <a href="basarilar.html" class="text-white hover:text-sky-200">Başarılarımız</a>
+                            <a href="galeri.html" class="text-white hover:text-sky-200">Galeri</a>
+                            <a href="projeler.html" class="text-white hover:text-sky-200">Projelerimiz</a>
+                            <a href="haberler.html" class="text-white hover:text-sky-200">Haberler</a>
+                            <a href="5sinif-kayit.html" class="text-white hover:text-sky-200">5. Sınıf Kayıt</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-sky-800 text-center mb-8">Haberler</h2>
+                <div id="allNewsList" class="max-w-4xl mx-auto">
+                    <!-- Haberler burada listelenecek -->
+                    <p class="text-center py-8 text-gray-500">Haberler yükleniyor...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-sky-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2024 Dudullu AMANETOĞLU ANADOLU İMAM HATİP LİSESİ</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

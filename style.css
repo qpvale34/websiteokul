@@ -1,0 +1,99 @@
+/* Admin panel specific styles */
+.tab-btn {
+    position: relative;
+}
+
+.tab-btn.text-sky-800::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0284c7;
+}
+
+/* Carousel styles */
+.carousel-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-items {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.carousel-controls button {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    color: #0c4a6e;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.carousel-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .slider-container {
+        height: 300px;
+    }
+
+    .slider-item .text-4xl {
+        font-size: 1.75rem;
+    }
+
+    .slider-item .text-xl {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .slider-container {
+        height: 200px;
+    }
+
+    .slider-item .text-4xl {
+        font-size: 1.5rem;
+    }
+
+    .slider-item .text-xl {
+        font-size: 0.875rem;
+    }
+}

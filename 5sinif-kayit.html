@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5. Sınıf Kayıt Başvurusu - Dudullu AMANETOĞLU ANADOLU İMAM HATİP LİSESİ</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-sky-600 text-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="rounded-full bg-white p-2 h-16 w-16 flex items-center justify-center">
+                        <span class="text-sky-600 font-bold text-2xl">DA</span>
+                    </div>
+                    <h1 class="ml-3 text-xl font-bold">Dudullu AMANETOĞLU<br/>ANADOLU İMAM HATİP LİSESİ</h1>
+                </div>
+                <button id="sidebarToggle" class="text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-sky-800 transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+                    <div class="p-4">
+                        <button id="sidebarClose" class="text-white mb-8">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        <nav class="flex flex-col space-y-4">
+                            <a href="index.html" class="text-white hover:text-sky-200">Ana Sayfa</a>
+                            <a href="okulumuzdan.html" class="text-white hover:text-sky-200">Okulumuzdan</a>
+                            <a href="iletisim.html" class="text-white hover:text-sky-200">İletişim</a>
+                            <a href="basarilar.html" class="text-white hover:text-sky-200">Başarılarımız</a>
+                            <a href="galeri.html" class="text-white hover:text-sky-200">Galeri</a>
+                            <a href="projeler.html" class="text-white hover:text-sky-200">Projelerimiz</a>
+                            <a href="haberler.html" class="text-white hover:text-sky-200">Haberler</a>
+                            <a href="5sinif-kayit.html" class="text-white hover:text-sky-200 font-bold">5. Sınıf Kayıt</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="py-12 bg-sky-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-sky-800 text-center mb-8">5. Sınıf Kayıt Başvurusu</h2>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-12">
+                    Okulumuzun 5. sınıfına kayıt olmak için lütfen aşağıdaki başvuru formunu doldurunuz.
+                </p>
+                
+                <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-sm p-8">
+                    <form id="registrationForm" class="space-y-6">
+                        <div>
+                            <label for="studentName" class="block text-sm font-medium text-gray-700 mb-1">Öğrenci Adı Soyadı</label>
+                            <input type="text" id="studentName" name="studentName" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="fatherName" class="block text-sm font-medium text-gray-700 mb-1">Baba Adı</label>
+                            <input type="text" id="fatherName" name="fatherName" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="fatherJob" class="block text-sm font-medium text-gray-700 mb-1">Baba Mesleği</label>
+                            <input type="text" id="fatherJob" name="fatherJob" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="motherName" class="block text-sm font-medium text-gray-700 mb-1">Anne Adı</label>
+                            <input type="text" id="motherName" name="motherName" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="motherJob" class="block text-sm font-medium text-gray-700 mb-1">Anne Mesleği</label>
+                            <input type="text" id="motherJob" name="motherJob" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Ev Adresi</label>
+                            <textarea id="address" name="address" rows="3" class="w-full p-3 border border-gray-300 rounded-lg" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="district" class="block text-sm font-medium text-gray-700 mb-1">İkamet Edilen Semt</label>
+                            <input type="text" id="district" name="district" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">İletişim Telefonu</label>
+                            <input type="tel" id="phone" name="phone" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-posta (İsteğe Bağlı)</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        
+                        <div>
+                            <label for="school" class="block text-sm font-medium text-gray-700 mb-1">Şu anki Okulu</label>
+                            <input type="text" id="school" name="school" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        </div>
+                        
+                        <div>
+                            <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Ek Notlar (İsteğe Bağlı)</label>
+                            <textarea id="notes" name="notes" rows="3" class="w-full p-3 border border-gray-300 rounded-lg"></textarea>
+                        </div>
+                        
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-sky-600 text-white py-3 px-4 rounded-lg hover:bg-sky-700 font-medium">Başvuruyu Gönder</button>
+                        </div>
+                    </form>
+                    
+                    <div id="successMessage" class="mt-6 p-4 bg-green-100 text-green-800 rounded-lg hidden">
+                        <p class="font-medium">Başvurunuz başarıyla alınmıştır!</p>
+                        <p class="mt-2">En kısa sürede sizinle iletişime geçilecektir.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-sky-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2024 Dudullu AMANETOĞLU ANADOLU İMAM HATİP LİSESİ</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="kayit.js"></script>
+</body>
+</html>

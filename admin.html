@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Paneli - Dudullu AMANETOĞLU ANADOLU İMAM HATİP LİSESİ</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div id="loginScreen" class="fixed inset-0 bg-sky-800 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+            <h2 class="text-2xl font-bold text-sky-800 mb-6">Admin Paneli Girişi</h2>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Kullanıcı Adı</label>
+                    <input type="text" id="username" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Şifre</label>
+                    <input type="password" id="password" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">Giriş Yap</button>
+                </div>
+            </form>
+            <p id="loginError" class="text-red-500 mt-4 text-center hidden">Hatalı kullanıcı adı veya şifre!</p>
+        </div>
+    </div>
+
+    <header id="adminHeader" class="bg-sky-700 text-white shadow-lg hidden">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold">Admin Paneli</h1>
+                <div class="space-x-4">
+                    <button id="logoutButton" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Çıkış Yap</button>
+                    <a href="index.html" class="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded">Siteye Dön</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="adminContent" class="container mx-auto px-4 py-8 hidden">
+        <div class="tabs flex flex-wrap border-b mb-6">
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="announcements">Duyurular</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="news">Haberler</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="slider">Slider</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="school">Okul Bilgileri</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="gallery">Galeri</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="registrations">Kayıtlar</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="contact">İletişim</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="success">Başarılarımız</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="projects">Projelerimiz</button>
+            <button class="tab-btn py-2 px-4 font-medium" data-tab="password">Şifre Değiştir</button>
+        </div>
+
+        <!-- Duyurular Tab -->
+        <div id="announcementsTab" class="tab-content">
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Duyuru Ekle</h2>
+                <form id="announcementForm" class="space-y-4">
+                    <div>
+                        <label for="announcementTitle" class="block text-sm font-medium text-gray-700 mb-1">Başlık</label>
+                        <input type="text" id="announcementTitle" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div>
+                        <label for="announcementDescription" class="block text-sm font-medium text-gray-700 mb-1">Açıklama</label>
+                        <textarea id="announcementDescription" rows="4" class="w-full p-2 border border-gray-300 rounded" required></textarea>
+                    </div>
+                    <div>
+                        <label for="announcementDate" class="block text-sm font-medium text-gray-700 mb-1">Tarih</label>
+                        <input type="date" id="announcementDate" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">Duyuru Ekle</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Mevcut Duyurular</h2>
+                <div id="announcementsList" class="space-y-4">
+                    <p class="text-gray-500">Duyurular yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Haberler Tab -->
+        <div id="newsTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Haber Ekle</h2>
+                <form id="newsForm" class="space-y-4">
+                    <div>
+                        <label for="newsTitle" class="block text-sm font-medium text-gray-700 mb-1">Başlık</label>
+                        <input type="text" id="newsTitle" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div>
+                        <label for="newsDescription" class="block text-sm font-medium text-gray-700 mb-1">Açıklama</label>
+                        <textarea id="newsDescription" rows="4" class="w-full p-2 border border-gray-300 rounded" required></textarea>
+                    </div>
+                    <div>
+                        <label for="newsDate" class="block text-sm font-medium text-gray-700 mb-1">Tarih</label>
+                        <input type="date" id="newsDate" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">Haber Ekle</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Mevcut Haberler</h2>
+                <div id="newsListAdmin" class="space-y-4">
+                    <p class="text-gray-500">Haberler yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Tab -->
+        <div id="sliderTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Slider Görseli Ekle</h2>
+                <form id="sliderForm" class="space-y-4">
+                    <div>
+                        <label for="sliderTitle" class="block text-sm font-medium text-gray-700 mb-1">Başlık</label>
+                        <input type="text" id="sliderTitle" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div>
+                        <label for="sliderDescription" class="block text-sm font-medium text-gray-700 mb-1">Açıklama</label>
+                        <textarea id="sliderDescription" rows="2" class="w-full p-2 border border-gray-300 rounded" required></textarea>
+                    </div>
+                    <div>
+                        <label for="sliderImageURL" class="block text-sm font-medium text-gray-700 mb-1">Görsel URL</label>
+                        <input type="text" id="sliderImageURL" class="w-full p-2 border border-gray-300 rounded" 
+                               placeholder="https://example.com/image.jpg" required>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">Slider Görseli Ekle</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Mevcut Slider Görselleri</h2>
+                <div id="sliderListAdmin" class="space-y-4">
+                    <p class="text-gray-500">Slider görselleri yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Okul Bilgileri Tab -->
+        <div id="schoolTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Okul Bilgilerini Güncelle</h2>
+                <form id="schoolInfoForm" class="space-y-4">
+                    <div>
+                        <label for="schoolName" class="block text-sm font-medium text-gray-700 mb-1">Okul Adı</label>
+                        <input type="text" id="schoolNameInput" class="w-full p-2 border border-gray-300 rounded" 
+                               value="Dudullu AMANETOĞLU ANADOLU İMAM HATİP LİSESİ" required>
+                    </div>
+                    <div>
+                        <label for="schoolLogoURL" class="block text-sm font-medium text-gray-700 mb-1">Logo URL</label>
+                        <input type="text" id="schoolLogoURL" class="w-full p-2 border border-gray-300 rounded" 
+                               placeholder="https://example.com/logo.png">
+                    </div>
+                    <div>
+                        <label for="schoolBgURL" class="block text-sm font-medium text-gray-700 mb-1">Banner Arka Plan URL</label>
+                        <input type="text" id="schoolBgURL" class="w-full p-2 border border-gray-300 rounded" 
+                               placeholder="https://example.com/background.jpg">
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">Bilgileri Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Kayıtlar Tab -->
+        <div id="registrationsTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">5. Sınıf Kayıt Başvuruları</h2>
+                <div id="registrationsList" class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Öğrenci Adı</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Veli Adı</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Semt</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detay</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationsTableBody">
+                            <tr>
+                                <td class="py-4 px-4 text-center" colspan="5">Henüz başvuru bulunmamaktadır</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- İletişim Tab -->
+        <div id="contactTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">İletişim Sayfasını Düzenle</h2>
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="contactContent" class="block text-sm font-medium text-gray-700 mb-1">Sayfa İçeriği (HTML destekler)</label>
+                        <textarea id="contactContent" rows="12" class="w-full p-2 border border-gray-300 rounded font-mono" placeholder="<div class='contact-info'><h3>Okul Adresimiz</h3><p>Dudullu Mahallesi...</p></div>"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">HTML kodları ekleyebilirsiniz. Örneğin: &lt;div&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;a&gt; gibi.</p>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">İçeriği Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Başarılarımız Tab -->
+        <div id="successTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Başarılarımız Sayfasını Düzenle</h2>
+                <form id="successForm" class="space-y-4">
+                    <div>
+                        <label for="successContent" class="block text-sm font-medium text-gray-700 mb-1">Sayfa İçeriği (HTML destekler)</label>
+                        <textarea id="successContent" rows="12" class="w-full p-2 border border-gray-300 rounded font-mono" placeholder="<div class='success-item'><h3>2023 LGS Başarılarımız</h3><p>Öğrencilerimizden...</p></div>"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">HTML kodları ekleyebilirsiniz. Örneğin: &lt;div&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;a&gt; gibi.</p>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">İçeriği Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Projelerimiz Tab -->
+        <div id="projectsTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Projelerimiz Sayfasını Düzenle</h2>
+                <form id="projectsForm" class="space-y-4">
+                    <div>
+                        <label for="projectsContent" class="block text-sm font-medium text-gray-700 mb-1">Sayfa İçeriği (HTML destekler)</label>
+                        <textarea id="projectsContent" rows="12" class="w-full p-2 border border-gray-300 rounded font-mono" placeholder="<div class='project-item'><h3>TÜBİTAK Projesi</h3><p>Okulumuz öğrencileri...</p></div>"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">HTML kodları ekleyebilirsiniz. Örneğin: &lt;div&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;a&gt; gibi.</p>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">İçeriği Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Galeri Tab -->
+        <div id="galleryTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Galeri Resmi Ekle</h2>
+                <form id="galleryForm" class="space-y-4">
+                    <div>
+                        <label for="galleryImageTitle" class="block text-sm font-medium text-gray-700 mb-1">Başlık</label>
+                        <input type="text" id="galleryImageTitle" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div>
+                        <label for="galleryImageURL" class="block text-sm font-medium text-gray-700 mb-1">Resim URL</label>
+                        <input type="text" id="galleryImageURL" class="w-full p-2 border border-gray-300 rounded" 
+                               placeholder="https://example.com/resim.jpg" required>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">Resim Ekle</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Galeri Resimleri</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="galleryListAdmin">
+                    <p class="text-gray-500 col-span-3">Galeri resimleri yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Şifre Değiştir Tab -->
+        <div id="passwordTab" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-bold text-sky-800 mb-4">Admin Şifresini Değiştir</h2>
+                <form id="passwordForm" class="space-y-4">
+                    <div>
+                        <label for="currentPassword" class="block text-sm font-medium text-gray-700 mb-1">Mevcut Şifre</label>
+                        <input type="password" id="currentPassword" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div>
+                        <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-1">Yeni Şifre</label>
+                        <input type="password" id="newPassword" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Yeni Şifre Tekrar</label>
+                        <input type="password" id="confirmPassword" class="w-full p-2 border border-gray-300 rounded" required>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700">Şifreyi Güncelle</button>
+                    </div>
+                </form>
+                <p id="passwordMessage" class="mt-4 text-center hidden"></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="loginCheck.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
