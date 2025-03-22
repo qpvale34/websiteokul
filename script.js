@@ -32,60 +32,128 @@ function setupCarousel() {
 
     if (!carouselItems || !prevBtn || !nextBtn) return;
 
-    // Get slides from localStorage or use default
-    const slides = JSON.parse(localStorage.getItem('slides') || '[]');
-    let currentSlide = 0;
+    // Default slides if none exist in localStorage
+    const defaultSlides = [
+        {
+            imageURL: 'images/school-1.jpg',
+            title: 'Hoş Geldiniz',
+            description: 'Eğitimde Mükemmelliği Hedefliyoruz'
+        },
+        {
+            imageURL: 'images/school-2.jpg',
+            title: 'Başarılarımız',
+            description: 'Öğrencilerimizin Akademik ve Sosyal Başarıları'
+        },
+        {
+            imageURL: 'images/school-3.jpg',
+            title: 'Modern Eğitim',
+            description: 'Teknoloji ile Entegre Eğitim Sistemimiz'
+        }
+    ];
 
-    // If there are slides saved, use them. Otherwise, keep the default one
+    const slides = JSON.parse(localStorage.getItem('slides') || JSON.stringify(defaultSlides));
+    let currentSlide = 0;
+    let isTransitioning = false;
+
     if (slides.length > 0) {
         carouselItems.innerHTML = '';
         slides.forEach((slide, index) => {
             const slideElement = document.createElement('div');
-            slideElement.className = `carousel-item absolute inset-0 transition-opacity duration-500 ease-in-out flex flex-col justify-center items-center text-center p-8 ${index === 0 ? 'opacity-100' : 'opacity-0'}`;
-            slideElement.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${slide.imageURL}')`;
+            slideElement.className = `carousel-item absolute inset-0 transition-all duration-700 ease-in-out flex flex-col justify-center items-center text-center p-8 ${
+                index === 0 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+            }`;
+            slideElement.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${slide.imageURL}')`;
             slideElement.style.backgroundSize = 'cover';
             slideElement.style.backgroundPosition = 'center';
 
             slideElement.innerHTML = `
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">${slide.title || 'Okul Bilgisi'}</h2>
-                <p class="text-lg md:text-xl text-white">${slide.description || ''}</p>
+                <div class="transform transition-transform duration-700 scale-90 opacity-90 hover:scale-100 hover:opacity-100">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white text-shadow-lg">${slide.title}</h2>
+                    <p class="text-xl md:text-2xl text-white text-shadow-md max-w-3xl mx-auto">${slide.description}</p>
+                </div>
             `;
 
             carouselItems.appendChild(slideElement);
         });
     }
 
-    // Get all slides after they're loaded/created
     const slideElements = carouselItems.querySelectorAll('.carousel-item');
-    if (slideElements.length <= 1) return; // If there's only one slide, no need for controls
+    if (slideElements.length <= 1) return;
 
-    // Show/hide slides function
-    function showSlide(n) {
-        slideElements.forEach((slide, index) => {
-            slide.classList.toggle('opacity-0', index !== n);
-            slide.classList.toggle('opacity-100', index === n);
-        });
-        currentSlide = n;
+    function showSlide(n, direction = 'right') {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const current = slideElements[currentSlide];
+        const next = slideElements[n];
+        
+        // Direction based translations
+        const outTransform = direction === 'right' ? '-translate-x-full' : 'translate-x-full';
+        const inTransform = direction === 'right' ? 'translate-x-full' : '-translate-x-full';
+
+        // Set initial position for incoming slide
+        next.classList.remove('opacity-0', '-translate-x-full', 'translate-x-full');
+        next.classList.add(inTransform);
+
+        // Trigger reflow
+        void next.offsetWidth;
+
+        // Animate both slides
+        current.classList.add('opacity-0', outTransform);
+        next.classList.remove(inTransform);
+        next.classList.add('opacity-100');
+
+        setTimeout(() => {
+            isTransitioning = false;
+            currentSlide = n;
+        }, 700);
     }
 
-    // Next slide function
     function nextSlide() {
         const next = (currentSlide + 1) % slideElements.length;
-        showSlide(next);
+        showSlide(next, 'right');
     }
 
-    // Previous slide function
     function prevSlide() {
         const prev = (currentSlide - 1 + slideElements.length) % slideElements.length;
-        showSlide(prev);
+        showSlide(prev, 'left');
     }
 
     // Add event listeners
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
 
-    // Auto-advance slides every 5 seconds
-    setInterval(nextSlide, 5000);
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Add swipe support for touch devices
+    let touchStartX = 0;
+    carouselItems.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    carouselItems.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextSlide();
+            else prevSlide();
+        }
+    });
+
+    // Auto-advance slides every 6 seconds if no interaction
+    let autoplayInterval = setInterval(nextSlide, 6000);
+
+    // Pause autoplay on hover
+    carouselItems.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+    carouselItems.addEventListener('mouseleave', () => {
+        clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(nextSlide, 6000);
+    });
 }
 
 // Load Announcements
